@@ -1,0 +1,30 @@
+---
+
+# Load a bit specific defaults
+- name: Load OS specific values
+  include_vars: "{{ ansible_os_family }}.yml"
+  with_first_found:
+   - "{{ ansible_distribution }}.yml"
+   - "{{ ansible_os_family }}.yml"
+   - default.yml
+
+# Add groups first so we can use them for our user(s)
+- import_tasks: groups.yaml
+  tags:
+    - users
+    - users_groups
+    - manage_groups
+    - groups
+
+# Then add user(s)
+- import_tasks: users.yaml
+  tag:
+    - users
+    - manage_users
+
+# WIP
+# Manage authorized keys for user(s)
+#- import_tasks: authorized_keys.yaml
+#  tags:
+#    - users
+#    - manage_authorized_keys

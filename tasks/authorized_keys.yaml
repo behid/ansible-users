@@ -1,0 +1,15 @@
+---
+
+#- name: Manage ~/.ssh/authorized_keys for user(s)
+#  authorized_key:
+#    user: "{{ item.name }}"
+#    key: "{{ (item.sshkeys if item.sshkeys is string else '\n'.join(item.sshkeys)) | string }}"
+#    state: "{{ item.sshkeys_state }}"
+#    exclusive: "{{ item.sshkeys_exclusive | default("no")}}"
+#  with_flattened:
+#    - "{{ users }}"
+#    - "{{ host_specific_users }}"
+#    - "{{ group_specific_users }}"
+#  when: (item.name|d() and item.state|d('present') != 'absent' and
+#         item.sshkeys|d() and item.sshkeys_state|d('present') != 'absent')
+#  no_log: '{{ users_no_log | bool }}'

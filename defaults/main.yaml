@@ -1,0 +1,26 @@
+---
+# This is the default values for our role
+
+# This is generic for all managed hosts
+# Should be overwritten in group_vars/all
+users: []
+users_groups: []
+
+# Specific to a host
+# Should be overwritten in hosts_vars/<host>
+host_specific_users: []
+host_specific_users_groups: []
+
+# Specific to a group of hosts
+# Should be overwritten in group_vars/<group of hosts>
+group_specific_users: []
+group_specific_users_groups: []
+
+# Users to delete (probably not used)
+delete_users: []
+delete_groups: []
+
+# Some defaults (non os specific)
+users_no_log: true
+users_default_shell: /bin/bash
+users_default_password: '!!'

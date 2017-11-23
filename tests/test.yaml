@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  remote_user: root
+  vars:
+    users:
+    - name: test1
+      comment: 'Test User 1'
+      uid: 1010
+      groups:
+      - testgroup1
+      - testgroup2
+
+  roles:
+    - ansible-users

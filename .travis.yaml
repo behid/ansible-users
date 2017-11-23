@@ -1,0 +1,14 @@
+---
+sudo: required
+language: python
+python: "2.7"
+
+install:
+  - pip install ansible
+
+  # Add ansible.cfg to pick up roles path.
+  - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
+
+script:
+  # Syntax Check
+  - ansible-playbook -i localhost, tests/test.yml --syntax-check

@@ -1,0 +1,23 @@
+---
+
+- name: Create Groups
+  group:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('present') }}"
+    gid: "{{ item.gid | default(omit) }}"
+    system: "{{ item.system | default(omit) }}"
+  with_flattened:
+    - "{{ users_groups }}"
+    - "{{ host_specific_users_groups }}"
+    - "{{ group_specific_users_groups }}"
+  when: item.state|default('present') != "absent"
+
+- name: Remove Groups
+  group:
+    name: "{{ item.name }}"
+    state: absent
+  with_flattened:
+    - "{{ users_groups }}"
+    - "{{ host_specific_users_groups }}"
+    - "{{ group_specific_users_groups }}"
+  when: item.state == "absent"

@@ -1,0 +1,4 @@
+---
+
+# Debian based distros specifics
+users_admin_group: sudo
