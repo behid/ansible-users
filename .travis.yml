@@ -11,4 +11,4 @@ install:
 
 script:
   # Syntax Check
-  - ansible-playbook -i localhost, tests/test.yml --syntax-check
+  - ansible-playbook -i localhost, tests/test.yaml --syntax-check
