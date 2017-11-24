@@ -20,4 +20,4 @@
     - "{{ users_groups }}"
     - "{{ host_specific_users_groups }}"
     - "{{ group_specific_users_groups }}"
-  when: item.state == "absent"
+  when: item.state|default('present') == "absent"
