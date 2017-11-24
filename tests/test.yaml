@@ -9,6 +9,9 @@
       groups:
       - testgroup1
       - testgroup2
+      ssh_key:
+        - key: ssh-rsa AAAAA.....AAAA test@test
+          state: present
 
   roles:
     - ansible-users
