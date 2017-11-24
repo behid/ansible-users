@@ -14,11 +14,11 @@ script:
   - ansible-playbook -i localhost, tests/test.yaml --syntax-check
 
   # Run tests
-  - ansible-playbook -i localhost, --connection=local --sudo tests/test.yaml
+  - ansible-playbook -i localhost, --connection=local --become tests/test.yaml
 
   # Idempotence test
   - >
-    ansible-playbook -i localhost, --connection=local --sudo tests/test.yaml
+    ansible-playbook -i localhost, --connection=local --become tests/test.yaml
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
