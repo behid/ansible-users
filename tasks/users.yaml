@@ -8,7 +8,7 @@
     group: "{{ item.group | default(omit)}}"
     groups: "{{ item.groups | default(omit) | join(',') }}"
     append: "{{ item.append | default(True) }}"
-    state: "{{ item.state | default(''present') }}"
+    state: "{{ item.state | default('present') }}"
     password: "{{ item.password | default(users_default_password) }}"
     update_password: "{{ item.update_password | default('on_create') }}"
     system: "{{ item.system | default(omit) }}"
