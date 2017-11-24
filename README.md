@@ -3,8 +3,8 @@
 # ansible-users
 Ansible role to create and manage users
 
-Made with inspiration from:
-https://github.com/willshersystems/ansible-users
-https://github.com/singleplatform-eng/ansible-users
-https://github.com/singleplatform-eng/ansible-users
-https://github.com/debops/ansible-users
+Made with inspiration from:  
+https://github.com/willshersystems/ansible-users  
+https://github.com/singleplatform-eng/ansible-users  
+https://github.com/singleplatform-eng/ansible-users  
+https://github.com/debops/ansible-users  
