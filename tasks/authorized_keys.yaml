@@ -2,10 +2,10 @@
 
 - name: Manage ~/.ssh/authorized_keys for generic user(s)
   authorized_key:
-    user: "{{item.0.username}}"
+    user: "{{item.0.name}}"
     key: "{{item.1.key}}"
     state: "{{ item.1.state }}"
-    path: "{{ item.0.home | default('/home/' + item.0.username) }}/.ssh/authorized_keys"
+    path: "{{ item.0.home | default('/home/' + item.0.name) }}/.ssh/authorized_keys"
   with_subelements:
     - "{{ users }}"
     - ssh_key
@@ -13,10 +13,10 @@
 
 - name: Manage ~/.ssh/authorized_keys for host specific user(s)
   authorized_key:
-    user: "{{item.0.username}}"
+    user: "{{item.0.name}}"
     key: "{{item.1.key}}"
     state: "{{ item.1.state }}"
-    path: "{{ item.0.home | default('/home/' + item.0.username) }}/.ssh/authorized_keys"
+    path: "{{ item.0.home | default('/home/' + item.0.name) }}/.ssh/authorized_keys"
   with_subelements:
     - "{{ host_specific_users }}"
     - ssh_key
@@ -24,10 +24,10 @@
 
 - name: Manage ~/.ssh/authorized_keys for group specific user(s)
   authorized_key:
-    user: "{{item.0.username}}"
+    user: "{{item.0.name}}"
     key: "{{item.1.key}}"
     state: "{{ item.1.state }}"
-    path: "{{ item.0.home | default('/home/' + item.0.username) }}/.ssh/authorized_keys"
+    path: "{{ item.0.home | default('/home/' + item.0.name) }}/.ssh/authorized_keys"
   with_subelements:
     - "{{ group_specific_users }}"
     - ssh_key
