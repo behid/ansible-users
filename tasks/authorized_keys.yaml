@@ -1,15 +1,34 @@
 ---
 
-#- name: Manage ~/.ssh/authorized_keys for user(s)
-#  authorized_key:
-#    user: "{{ item.name }}"
-#    key: "{{ (item.sshkeys if item.sshkeys is string else '\n'.join(item.sshkeys)) | string }}"
-#    state: "{{ item.sshkeys_state }}"
-#    exclusive: "{{ item.sshkeys_exclusive | default("no")}}"
-#  with_flattened:
-#    - "{{ users }}"
-#    - "{{ host_specific_users }}"
-#    - "{{ group_specific_users }}"
-#  when: (item.name|d() and item.state|d('present') != 'absent' and
-#         item.sshkeys|d() and item.sshkeys_state|d('present') != 'absent')
-#  no_log: '{{ users_no_log | bool }}'
+- name: Manage ~/.ssh/authorized_keys for generic user(s)
+  authorized_key:
+    user: "{{item.0.username}}"
+    key: "{{item.1.key}}"
+    state: "{{ item.1.state }}"
+    path: "{{ item.0.home | default('/home/' + item.0.username) }}/.ssh/authorized_keys"
+  with_subelements:
+    - "{{ users }}"
+    - ssh_key
+    - skip_missing: yes
+
+- name: Manage ~/.ssh/authorized_keys for host specific user(s)
+  authorized_key:
+    user: "{{item.0.username}}"
+    key: "{{item.1.key}}"
+    state: "{{ item.1.state }}"
+    path: "{{ item.0.home | default('/home/' + item.0.username) }}/.ssh/authorized_keys"
+  with_subelements:
+    - "{{ host_specific_users }}"
+    - ssh_key
+    - skip_missing: yes
+
+- name: Manage ~/.ssh/authorized_keys for group specific user(s)
+  authorized_key:
+    user: "{{item.0.username}}"
+    key: "{{item.1.key}}"
+    state: "{{ item.1.state }}"
+    path: "{{ item.0.home | default('/home/' + item.0.username) }}/.ssh/authorized_keys"
+  with_subelements:
+    - "{{ group_specific_users }}"
+    - ssh_key
+    - skip_missing: yes
