@@ -22,9 +22,8 @@
     - users
     - manage_users
 
-# WIP
 # Manage authorized keys for user(s)
-#- import_tasks: authorized_keys.yaml
-#  tags:
-#    - users
-#    - manage_authorized_keys
+- import_tasks: authorized_keys.yaml
+  tags:
+    - users
+    - manage_authorized_keys
