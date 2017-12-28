@@ -12,6 +12,8 @@
       ssh_key:
         - key: ssh-rsa AAAAA.....AAAA test@test
           state: present
+        - key: ssh-rsa BBBBB.....BBBB test2@test2
+          state: present
     users_groups:
       - name: testgroup1
       - name: testgroup2
