@@ -1,0 +1,12 @@
+---
+galaxy_info:
+	author: Andreas Falck
+	description: Manages users on a Linux system
+	license: MIT
+	platforms:
+		- name: Debian
+		  versions:
+			  - all
+		- name: Ubuntu
+		  versions:
+			  - all
