@@ -1,8 +1,10 @@
 ---
 galaxy_info:
   author: Andreas Falck
+  	company: N/A
     description: Manages users on a Linux system
     license: MIT
+	min_ansible_version: 1.5
     platforms:
       - name: Debian
         versions:
