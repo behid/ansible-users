@@ -9,7 +9,7 @@
     user: "{{item.0.name}}"
     key: "{{item.1.key}}"
     state: "{{ item.1.state }}"
-    comment: "{{ item.1.comment | default(omit()) }}"
+    comment: "{{ item.1.comment | default(omit) }}"
     path: "{{ item.0.home | default('/home/' + item.0.name) }}/.ssh/authorized_keys"
   with_subelements:
     - "{{ users }}"
@@ -22,7 +22,7 @@
     user: "{{item.0.name}}"
     key: "{{item.1.key}}"
     state: "{{ item.1.state }}"
-    comment: "{{ item.1.comment | default(omit()) }}"
+    comment: "{{ item.1.comment | default(omit) }}"
     path: "{{ item.0.home | default('/home/' + item.0.name) }}/.ssh/authorized_keys"
   with_subelements:
     - "{{ host_specific_users }}"
@@ -35,7 +35,7 @@
     user: "{{item.0.name}}"
     key: "{{item.1.key}}"
     state: "{{ item.1.state }}"
-    comment: "{{ item.1.comment | default(omit()) }}"
+    comment: "{{ item.1.comment | default(omit) }}"
     path: "{{ item.0.home | default('/home/' + item.0.name) }}/.ssh/authorized_keys"
   with_subelements:
     - "{{ group_specific_users }}"
