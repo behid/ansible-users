@@ -6,7 +6,7 @@
     comment: "{{ item.comment | default(omit) }}"
     uid: "{{ item.uid | default(omit) }}"
     group: "{{ item.group | default(omit) }}"
-    groups: "{{ item.groups | default(omit) | join(',') }}"
+    groups: "{{ item.groups | default([]) | join(',') }}"
     append: "{{ item.append | default(True) }}"
     state: "{{ item.state | default('present') }}"
     password: "{{ item.password | default(users_default_password) }}"
