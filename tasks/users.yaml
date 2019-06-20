@@ -5,7 +5,7 @@
     name: "{{ item.name }}"
     comment: "{{ item.comment | default(omit) }}"
     uid: "{{ item.uid | default(omit) }}"
-    group: "{{ item.group | default(omit)}}"
+    group: "{{ item.group | default(omit) }}"
     groups: "{{ item.groups | default(omit) | join(',') }}"
     append: "{{ item.append | default(True) }}"
     state: "{{ item.state | default('present') }}"
