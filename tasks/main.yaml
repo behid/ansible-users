@@ -3,9 +3,9 @@
 # Load a bit specific defaults
 - name: Load OS specific values
   include_vars: "{{ var_files }}"
-  when: var_files
+  when: var_files|bool
   vars:
-    var_files: '{{ lookup("first_found", files=files, errors="ignore")|default([])}}'
+    var_files: '{{ lookup("first_found", files=files, errors="ignore") }}'
     files:
       - "{{ ansible_distribution }}.yaml"
       - "{{ ansible_os_family }}.yaml"
