@@ -7,11 +7,11 @@
   vars:
     var_files: '{{ lookup("first_found", files=files, errors="ignore") }}'
     files:
-      - "{{ ansible_distribution }}.yaml"
-      - "{{ ansible_os_family }}.yaml"
+      - "{{ ansible_distribution }}.yml"
+      - "{{ ansible_os_family }}.yml"
 
 # Add groups first so we can use them for our user(s)
-- import_tasks: groups.yaml
+- import_tasks: groups.yml
   tags:
     - users
     - users_groups
@@ -19,13 +19,13 @@
     - groups
 
 # Then add user(s)
-- import_tasks: users.yaml
+- import_tasks: users.yml
   tags:
     - users
     - manage_users
 
 # Manage authorized keys for user(s)
-- import_tasks: authorized_keys.yaml
+- import_tasks: authorized_keys.yml
   tags:
     - users
     - manage_authorized_keys
