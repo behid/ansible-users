@@ -2,13 +2,14 @@
 
 # Load a bit specific defaults
 - name: Load OS specific values
-  include_vars: "{{ var_files }}"
-  when: var_files|bool
+  include_vars: "{{ lookup('first_found', params) }}"
   vars:
-    var_files: '{{ lookup("first_found", files=files, errors="ignore") }}'
-    files:
-      - "{{ ansible_distribution }}.yml"
-      - "{{ ansible_os_family }}.yml"
+    params:
+      files:
+        - '{{ansible_distribution}}.yml'
+        - '{{ansible_os_family}}.yml'
+      paths:
+        - 'vars'
 
 # Add groups first so we can use them for our user(s)
 - import_tasks: groups.yml
