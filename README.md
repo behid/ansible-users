@@ -7,6 +7,5 @@ If you don't create a group, don't specify group when adding a user. By default 
 
 Made with inspiration from:  
 https://github.com/willshersystems/ansible-users  
-https://github.com/singleplatform-eng/ansible-users  
-https://github.com/singleplatform-eng/ansible-users  
+https://github.com/singleplatform-eng/ansible-users   
 https://github.com/debops/ansible-users  
