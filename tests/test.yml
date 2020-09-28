@@ -9,6 +9,7 @@
       groups:
       - testgroup1
       - testgroup2
+      - "{{ users_admin_group }}"
       ssh_key:
         - key: ssh-rsa AAAAA.....AAAA test@test
           state: present
