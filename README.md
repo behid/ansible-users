@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/behid/ansible-users.svg?branch=master)](https://travis-ci.org/behid/ansible-users)
+[![CI](https://github.com/behid/ansible-users/workflows/CI/badge.svg?event=push)](https://github.com/behid/ansible-users/actions?query=workflow%3ACI)
+
 
 # ansible-users
 Ansible role to create and manage users
