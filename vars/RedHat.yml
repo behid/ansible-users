@@ -1,4 +1,4 @@
 ---
 
 # RedHat based distros specifics
-users_admin_group: wheel
+users_admin_group: 'wheel'
