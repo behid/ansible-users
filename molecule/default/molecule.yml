@@ -9,14 +9,9 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: ubuntu
-    image: docker.io/geerlingguy/docker-ubuntu2004-ansible
-    pre_build_image: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: true
-  - name: centos
-    image: docker.io/geerlingguy/docker-centos8-ansible
+  - name: instance
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
     pre_build_image: true
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
