@@ -24,4 +24,4 @@ delete_groups: []
 # Some defaults (non os specific)
 users_no_log: true
 users_default_shell: /bin/bash
-users_default_password: '!!'
+users_default_password: '$6$O6rO54gzcHYq720s$a70Adg/aSmRUCy.dnn9.qR9JLmHR6aIB4sEwA6X/zwMnw0.QCN5lXZPQarh7ftulwmKyyTUym1y4sPSjmEsvz1'

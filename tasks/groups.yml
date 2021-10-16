@@ -1,5 +1,10 @@
 ---
 
+- name: Make sure our admin group exist
+  group:
+    name: "{{ users_admin_group }}"
+    state: present
+
 - name: Create Groups
   group:
     name: "{{ item.name }}"

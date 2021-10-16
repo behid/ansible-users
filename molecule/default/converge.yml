@@ -1,7 +1,10 @@
 ---
-- hosts: localhost
-  remote_user: root
+- name: Converge
+  hosts: all
+
   vars:
+    #ansible_python_interpreter: /usr/libexec/platform-python
+    ansible_ssh_pipelining: false
     users:
       - name: test1
         comment: 'Test User 1'
@@ -43,4 +46,4 @@
       - name: testgroup4
 
   roles:
-    - behid.users
+    - role: behid.users
