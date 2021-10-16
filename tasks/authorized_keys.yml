@@ -2,7 +2,7 @@
 
 # Can't think of a better way to handle this right now.
 # I do want to have the option to specify users globaly, per host and per group
-# Maybe someone knows? 
+# Maybe someone knows?
 
 - name: Manage ~/.ssh/authorized_keys for generic user(s)
   authorized_key:
@@ -14,7 +14,7 @@
   with_subelements:
     - "{{ users }}"
     - ssh_key
-    - skip_missing: yes
+    - skip_missing: true
   no_log: "{{ users_no_log | bool }}"
 
 - name: Manage ~/.ssh/authorized_keys for host specific user(s)
@@ -27,7 +27,7 @@
   with_subelements:
     - "{{ host_specific_users }}"
     - ssh_key
-    - skip_missing: yes
+    - skip_missing: true
   no_log: "{{ users_no_log | bool }}"
 
 - name: Manage ~/.ssh/authorized_keys for group specific user(s)
@@ -40,5 +40,5 @@
   with_subelements:
     - "{{ group_specific_users }}"
     - ssh_key
-    - skip_missing: yes
+    - skip_missing: true
   no_log: "{{ users_no_log | bool }}"
