@@ -1,0 +1,49 @@
+---
+- name: Converge
+  hosts: all
+
+  vars:
+    #ansible_python_interpreter: /usr/libexec/platform-python
+    ansible_ssh_pipelining: false
+    users:
+      - name: test1
+        comment: 'Test User 1'
+        uid: 1010
+        groups:
+          - testgroup1
+          - testgroup2
+          - "{{ users_admin_group }}"
+        ssh_key:
+          - key: ssh-rsa AAAAA.....AAAA test@test
+            state: present
+          - key: ssh-rsa BBBBB.....BBBB test2@test2
+            state: present
+    users_groups:
+      - name: testgroup1
+      - name: testgroup2
+    host_specific_users:
+      - name: test2
+        comment: 'Test User 2'
+        uid: 1020
+        groups:
+          - testgroup3
+          - testgroup4
+        ssh_key:
+          - key: ssh-rsa AAAAA.....AAAA test@test
+            state: present
+          - key: ssh-rsa BBBBB.....BBBB test2@test2
+            state: present
+      - name: test3
+        comment: 'Test User 3'
+        uid: 1030
+        ssh_key:
+          - key: ssh-rsa AAAAA.....AAAA test@test
+            state: present
+          - key: ssh-rsa BBBBB.....BBBB test2@test2
+            state: present
+    host_specific_users_groups:
+      - name: testgroup3
+      - name: testgroup4
+
+  roles:
+    - role: behid.users
