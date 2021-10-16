@@ -1,0 +1,12 @@
+---
+extends: default
+
+rules:
+  line-length:
+    max: 140
+    level: warning
+  indentation:
+    indent-sequences: true
+    spaces: 2
+  comments-indentation: disable
+  comments: {require-starting-space: false}
