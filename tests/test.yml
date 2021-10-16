@@ -3,18 +3,18 @@
   remote_user: root
   vars:
     users:
-    - name: test1
-      comment: 'Test User 1'
-      uid: 1010
-      groups:
-      - testgroup1
-      - testgroup2
-      - "{{ users_admin_group }}"
-      ssh_key:
-        - key: ssh-rsa AAAAA.....AAAA test@test
-          state: present
-        - key: ssh-rsa BBBBB.....BBBB test2@test2
-          state: present
+      - name: test1
+        comment: 'Test User 1'
+        uid: 1010
+        groups:
+          - testgroup1
+          - testgroup2
+          - "{{ users_admin_group }}"
+        ssh_key:
+          - key: ssh-rsa AAAAA.....AAAA test@test
+            state: present
+          - key: ssh-rsa BBBBB.....BBBB test2@test2
+            state: present
     users_groups:
       - name: testgroup1
       - name: testgroup2
@@ -43,4 +43,4 @@
       - name: testgroup4
 
   roles:
-    - ansible-users
+    - behid.users
