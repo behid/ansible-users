@@ -3,7 +3,6 @@
   hosts: all
 
   vars:
-    #ansible_python_interpreter: /usr/libexec/platform-python
     ansible_ssh_pipelining: false
     users:
       - name: test1
