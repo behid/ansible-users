@@ -1,21 +1,25 @@
 ---
 # This is the default values for our role
 
-# This is generic for all managed hosts
-# Should be overwritten in group_vars or host_vars
+# This is the generic list of users, should be set globally for all servers
 # If you want a user to be able to sudo add "{{ users_admin_group }}" to groups within the user object.
-users: []
-users_groups: []
+# Please note that it's currently not possible to remove groups later on
+# NOTE: You always need to specify a state for users and groups
+users: {}
+users_groups: {}
 
-# Specific to a host
-# Should be overwritten in hosts_vars/<host>
-host_specific_users: []
-host_specific_users_groups: []
+# To override at a group level add to these lists
+group_specific_users: {}
+group_specific_groups: {}
 
-# Specific to a group of hosts
-# Should be overwritten in group_vars/<group of hosts>
-group_specific_users: []
-group_specific_users_groups: []
+# To override at a group level add to these lists
+host_specific_users: {}
+host_specific_groups: {}
+
+# TODO!
+# List of users that should be admin on systems
+# This list will not be merged so if you override the list at either group or host vars you need to specify all admins again.
+admin_users: []
 
 # Users to delete (probably not used)
 delete_users: []
