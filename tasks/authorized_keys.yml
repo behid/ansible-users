@@ -1,44 +1,11 @@
 ---
 
-# Can't think of a better way to handle this right now.
-# I do want to have the option to specify users globaly, per host and per group
-# Maybe someone knows?
-
-- name: Manage ~/.ssh/authorized_keys for generic user(s)
+- name: Manage ~/.ssh/authorized_keys for user(s)
   authorized_key:
-    user: "{{ item.0.name }}"
+    user: "{{ item.0.key }}"
     key: "{{ item.1.key }}"
     state: "{{ item.1.state }}"
     comment: "{{ item.1.comment | default(omit) }}"
-    path: "{{ item.0.home | default('/home/' + item.0.name) }}/.ssh/authorized_keys"
-  with_subelements:
-    - "{{ users }}"
-    - ssh_key
-    - skip_missing: true
-  no_log: "{{ users_no_log | bool }}"
-
-- name: Manage ~/.ssh/authorized_keys for host specific user(s)
-  authorized_key:
-    user: "{{ item.0.name }}"
-    key: "{{ item.1.key }}"
-    state: "{{ item.1.state }}"
-    comment: "{{ item.1.comment | default(omit) }}"
-    path: "{{ item.0.home | default('/home/' + item.0.name) }}/.ssh/authorized_keys"
-  with_subelements:
-    - "{{ host_specific_users }}"
-    - ssh_key
-    - skip_missing: true
-  no_log: "{{ users_no_log | bool }}"
-
-- name: Manage ~/.ssh/authorized_keys for group specific user(s)
-  authorized_key:
-    user: "{{ item.0.name }}"
-    key: "{{ item.1.key }}"
-    state: "{{ item.1.state }}"
-    comment: "{{ item.1.comment | default(omit) }}"
-    path: "{{ item.0.home | default('/home/' + item.0.name) }}/.ssh/authorized_keys"
-  with_subelements:
-    - "{{ group_specific_users }}"
-    - ssh_key
-    - skip_missing: true
+    path: "{{ item.0.value.home | default('/home/' + item.0.key) }}/.ssh/authorized_keys"
+  loop: "{{ users|dict2items|subelements('value.ssh_key') }}"
   no_log: "{{ users_no_log | bool }}"

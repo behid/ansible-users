@@ -1,28 +1,23 @@
 ---
 
-- name: Make sure our admin group exist
-  group:
-    name: "{{ users_admin_group }}"
-    state: present
-
+# Create groups
 - name: Create Groups
   group:
-    name: "{{ item.name }}"
-    state: "{{ item.state | default('present') }}"
-    gid: "{{ item.gid | default(omit) }}"
-    system: "{{ item.system | default(omit) }}"
-  with_flattened:
-    - "{{ users_groups }}"
-    - "{{ host_specific_users_groups }}"
-    - "{{ group_specific_users_groups }}"
-  when: item.state|default('present') != "absent"
+    name: "{{ item.key }}"
+    gid: "{{ item.value.gid | default(omit) }}"
+    system: "{{ item.value.system | default(omit) }}"
+    state: "{{ item.value.state }}"
+  loop: "{{ users_groups|dict2items }}"
+  when:
+    - item.value.state is defined
+    - item.value.state != "absent"
 
+# Remove groups
 - name: Remove Groups
   group:
-    name: "{{ item.name }}"
+    name: "{{ item.value }}"
     state: absent
-  with_flattened:
-    - "{{ users_groups }}"
-    - "{{ host_specific_users_groups }}"
-    - "{{ group_specific_users_groups }}"
-  when: item.state|default('present') == "absent"
+  loop: "{{ users_groups|dict2items }}"
+  when:
+    - item.value.state is defined
+    - item.value.state == "absent"

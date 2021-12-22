@@ -11,6 +11,43 @@
       paths:
         - 'vars'
 
+# Combine our users and groups variables
+# For now be verbose about what we do but don't log  output
+# I do all the combining here so I know that I always have all values refreshed
+- name: Combine users and group_specific_users dict
+  set_fact:
+    users: "{{ users|combine(group_specific_users, recursive=True) }}"
+  no_log: "{{ users_no_log | bool }}"
+
+- name: Combine combined users and host_specific_users dict
+  set_fact:
+    users: "{{ users|combine(host_specific_users, recursive=True) }}"
+  no_log: "{{ users_no_log | bool }}"
+
+- name: Combine users and group_specific_groups dict
+  set_fact:
+    users_groups: "{{ users_groups|combine(group_specific_groups, recursive=True) }}"
+  no_log: "{{ users_no_log | bool }}"
+
+- name: Combine combined groups and host_specific_groups dict
+  set_fact:
+    users_groups: "{{ users_groups|combine(host_specific_groups, recursive=True) }}"
+  no_log: "{{ users_no_log | bool }}"
+
+# We should have our admin group present, but if we don't create it
+- name: Make sure our admin group exist
+  group:
+    name: "{{ users_admin_group }}"
+    state: present
+
+- name: Debug users
+  debug:
+    var: users
+
+- name: Debug users groups
+  debug:
+    var: users_groups
+
 # Add groups first so we can use them for our user(s)
 - import_tasks: groups.yml
   tags:
