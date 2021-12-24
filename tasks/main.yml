@@ -40,14 +40,6 @@
     name: "{{ users_admin_group }}"
     state: present
 
-- name: Debug users
-  debug:
-    var: users
-
-- name: Debug users groups
-  debug:
-    var: users_groups
-
 # Add groups first so we can use them for our user(s)
 - import_tasks: groups.yml
   tags:
