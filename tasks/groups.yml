@@ -11,6 +11,7 @@
   when:
     - item.value.state is defined
     - item.value.state != "absent"
+  no_log: "{{ users_no_log | bool }}"
 
 # Remove groups
 - name: Remove Groups
@@ -21,3 +22,4 @@
   when:
     - item.value.state is defined
     - item.value.state == "absent"
+  no_log: "{{ users_no_log | bool }}"
