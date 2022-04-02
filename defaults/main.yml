@@ -3,7 +3,7 @@
 
 # This is the generic list of users, should be set globally for all servers
 # If you want a user to be able to sudo add "{{ users_admin_group }}" to groups within the user object.
-# Please note that it's currently not possible to remove groups later on
+# Please note that it's currently not possible to remove groups later on, so set minimal list of groups at a global level
 # NOTE: You always need to specify a state for users and groups
 users: {}
 users_groups: {}
