@@ -10,6 +10,7 @@
         comment: 'Test User 1'
         uid: 1010
         home: '/home/test1'
+        state: 'present'
         groups:
           - testgroup1
           - testgroup2
@@ -40,6 +41,7 @@
       test3:
         comment: 'Test User 3'
         uid: 1030
+        state: 'present'
         ssh_key:
           - key: ssh-rsa AAAAA.....AAAA test@test
             state: present
