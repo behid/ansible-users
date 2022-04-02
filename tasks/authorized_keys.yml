@@ -8,4 +8,7 @@
     comment: "{{ item.1.comment | default(omit) }}"
     path: "{{ item.0.value.home | default('/home/' + item.0.key) }}/.ssh/authorized_keys"
   loop: "{{ users|dict2items|subelements('value.ssh_key') }}"
+  when:
+    - item.0.value.state is defined
+    - item.0.value.state == 'present'
   no_log: "{{ users_no_log | bool }}"

@@ -28,5 +28,8 @@
     ssh_key_passphrase: "{{ item.value.ssh_key_passphrase | default(omit) }}"
     ssh_key_type: "{{ item.value.ssh_key_type | default(omit) }}"
   loop: "{{ users|dict2items }}"
-  when: (item.key|d() and item.key != 'root')
+  when:
+    - item.key != 'root'
+    - item.value.state is defined
+    - (item.value.state == 'present' or item.value.state == 'absent')
   no_log: "{{ users_no_log | bool }}"
