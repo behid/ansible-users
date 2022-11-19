@@ -1,13 +1,13 @@
 ---
 
 - name: Manage ~/.ssh/authorized_keys for user(s)
-  authorized_key:
+  ansible.posix.authorized_key:
     user: "{{ item.0.key }}"
     key: "{{ item.1.key }}"
     state: "{{ item.1.state }}"
     comment: "{{ item.1.comment | default(omit) }}"
     path: "{{ item.0.value.home | default('/home/' + item.0.key) }}/.ssh/authorized_keys"
-  loop: "{{ users|dict2items|subelements('value.ssh_key') }}"
+  loop: "{{ users | dict2items | subelements('value.ssh_key') }}"
   when:
     - item.0.value.state is defined
     - item.0.value.state == 'present'

@@ -1,7 +1,7 @@
 ---
 
 - name: Manage Users
-  user:
+  ansible.builtin.user:
     name: "{{ item.key }}"
     comment: "{{ item.value.comment | default(omit) }}"
     uid: "{{ item.value.uid | default(omit) }}"
@@ -27,7 +27,7 @@
     ssh_key_file: "{{ item.value.ssh_key_file | default(omit) }}"
     ssh_key_passphrase: "{{ item.value.ssh_key_passphrase | default(omit) }}"
     ssh_key_type: "{{ item.value.ssh_key_type | default(omit) }}"
-  loop: "{{ users|dict2items }}"
+  loop: "{{ users | dict2items }}"
   when:
     - item.key != 'root'
     - item.value.state is defined

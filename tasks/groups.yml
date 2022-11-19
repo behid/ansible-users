@@ -2,12 +2,12 @@
 
 # Create groups
 - name: Create Groups
-  group:
+  ansible.builtin.group:
     name: "{{ item.key }}"
     gid: "{{ item.value.gid | default(omit) }}"
     system: "{{ item.value.system | default(omit) }}"
     state: "{{ item.value.state }}"
-  loop: "{{ users_groups|dict2items }}"
+  loop: "{{ users_groups | dict2items }}"
   when:
     - item.value.state is defined
     - item.value.state != "absent"
@@ -15,10 +15,10 @@
 
 # Remove groups
 - name: Remove Groups
-  group:
+  ansible.builtin.group:
     name: "{{ item.value }}"
     state: absent
-  loop: "{{ users_groups|dict2items }}"
+  loop: "{{ users_groups | dict2items }}"
   when:
     - item.value.state is defined
     - item.value.state == "absent"

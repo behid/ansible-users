@@ -2,7 +2,7 @@
 
 # Load a bit specific defaults
 - name: Load OS specific values
-  include_vars: "{{ lookup('first_found', params) }}"
+  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
   vars:
     params:
       files:
@@ -15,33 +15,34 @@
 # For now be verbose about what we do but don't log  output
 # I do all the combining here so I know that I always have all values refreshed
 - name: Combine users and group_specific_users dict
-  set_fact:
-    users: "{{ users|combine(group_specific_users, recursive=True) }}"
+  ansible.builtin.set_fact:
+    users: "{{ users | combine(group_specific_users, recursive=True) }}"
   no_log: "{{ users_no_log | bool }}"
 
 - name: Combine combined users and host_specific_users dict
-  set_fact:
-    users: "{{ users|combine(host_specific_users, recursive=True) }}"
+  ansible.builtin.set_fact:
+    users: "{{ users | combine(host_specific_users, recursive=True) }}"
   no_log: "{{ users_no_log | bool }}"
 
 - name: Combine users and group_specific_groups dict
-  set_fact:
-    users_groups: "{{ users_groups|combine(group_specific_groups, recursive=True) }}"
+  ansible.builtin.set_fact:
+    users_groups: "{{ users_groups | combine(group_specific_groups, recursive=True) }}"
   no_log: "{{ users_no_log | bool }}"
 
 - name: Combine combined groups and host_specific_groups dict
-  set_fact:
-    users_groups: "{{ users_groups|combine(host_specific_groups, recursive=True) }}"
+  ansible.builtin.set_fact:
+    users_groups: "{{ users_groups | combine(host_specific_groups, recursive=True) }}"
   no_log: "{{ users_no_log | bool }}"
 
 # We should have our admin group present, but if we don't create it
 - name: Make sure our admin group exist
-  group:
+  ansible.builtin.group:
     name: "{{ users_admin_group }}"
     state: present
 
 # Add groups first so we can use them for our user(s)
-- import_tasks: groups.yml
+- name: Manage groups
+  ansible.builtin.import_tasks: groups.yml
   tags:
     - users
     - users_groups
@@ -49,13 +50,15 @@
     - groups
 
 # Then add user(s)
-- import_tasks: users.yml
+- name: Manage user(s)
+  ansible.builtin.import_tasks: users.yml
   tags:
     - users
     - manage_users
 
 # Manage authorized keys for user(s)
-- import_tasks: authorized_keys.yml
+- name: Manage authorized keys
+  ansible.builtin.import_tasks: authorized_keys.yml
   tags:
     - users
     - manage_authorized_keys
