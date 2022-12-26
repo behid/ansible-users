@@ -47,6 +47,10 @@
             state: present
           - key: ssh-rsa BBBBB.....BBBB test2@test2
             state: present
+      test4:
+        comment: 'Test User 4'
+        uid: 1030
+        state: 'present'
     group_specific_groups:
       testgroup3:
         state: 'present'
