@@ -49,7 +49,7 @@
             state: present
       test4:
         comment: 'Test User 4'
-        uid: 1030
+        uid: 1031
         state: 'present'
     group_specific_groups:
       testgroup3:
