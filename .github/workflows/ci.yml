@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        distro: [debian11, debian10]
+        distro: [debian11, debian10, ubuntu2204]
 
     steps:
       - name: Check out the codebase
