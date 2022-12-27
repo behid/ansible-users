@@ -6,31 +6,57 @@ name: CI
     branches:
       - master
 
+defaults:
+  run:
+    working-directory: 'behid.users'
+
 jobs:
 
-  test:
-    name: Molecule
+  lint:
+    name: Yamllint
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        distro:
-          - debian11
-
     steps:
-      - name: Check out the codebase.
-        uses: actions/checkout@v2
+      - name: Check out the codebase
+        uses: actions/checkout@v3
+        with:
+          path: 'behid.users'
 
-      - name: Set up Python 3.
+      - name: Set up Python 3.x
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
 
-            #      - name: Install test dependencies.
-            #        run: pip3 install molecule docker molecule-docker yamllint ansible-lint ansible ansible-core requests flake8
+      - name: Install test dependencies
+        run: pip3 install yamllint
 
-      - name: Run Molecule tests.
+      - name: Run yamllint
+        run: |
+          yamllint .
+
+  molecule:
+    name: Run molecule
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro: [debian11, debian10]
+
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v3
+        with:
+          path: 'behid.users'
+     
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v3
+        with: '3.x'
+
+      - name: Install test dependencies
+        run: pip3 install ansible molecule[docker] docker ansible-lint flake8
+
+      - name: Run Molecule tests
         run: molecule test
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
           MOLECULE_DISTRO: ${{ matrix.distro }}
+
