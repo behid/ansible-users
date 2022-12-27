@@ -14,8 +14,9 @@ jobs:
     strategy:
       matrix:
         distro:
-          - centos8
+          - rockylinux8
           - debian10
+          - ubuntu2204
 
     steps:
       - name: Check out the codebase.
